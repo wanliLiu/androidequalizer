@@ -1,13 +1,18 @@
 package com.soli.taihe.androidequalizer;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.audiofx.AudioEffect;
 import android.media.audiofx.BassBoost;
 import android.media.audiofx.Equalizer;
 import android.media.audiofx.PresetReverb;
@@ -22,11 +27,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -83,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
         // 创建MediaPlayer对象,并添加音频
         // 音频路径为  res/raw/beautiful.mp3
         mPlayer = MediaPlayer.create(this, R.raw.beautiful);
+
+        //系统的均衡器
+        setEffectsSystem();
+
         // 初始化示波器
         setupVisualizer();
         // 初始化均衡控制器
@@ -98,6 +109,49 @@ public class MainActivity extends AppCompatActivity {
 
         // 开发播放音乐
         mPlayer.start();
+    }
+
+    /**
+     *
+     */
+    private void setEffectsSystem() {
+        if (hasEffectsPanel(this)) {
+            Button button = new Button(this);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            button.setText("启动系统的均衡器");
+            button.setOnClickListener(view -> navigateToEqualizer(this));
+            layout.addView(button, params);
+        }
+    }
+
+    /**
+     * @param activity
+     * @return
+     */
+    private boolean hasEffectsPanel(final Activity activity) {
+        final PackageManager packageManager = activity.getPackageManager();
+        return packageManager.resolveActivity(createEffectsIntent(), PackageManager.MATCH_DEFAULT_ONLY) != null;
+    }
+
+    /**
+     * @return
+     */
+    private Intent createEffectsIntent() {
+        final Intent effects = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
+        effects.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, mPlayer.getAudioSessionId());
+        return effects;
+    }
+
+    /**
+     * @param context
+     */
+    private void navigateToEqualizer(Activity context) {
+        try {
+            // The google MusicFX apps need to be started using startActivityForResult
+            context.startActivityForResult(createEffectsIntent(), 666);
+        } catch (final ActivityNotFoundException notFound) {
+            Toast.makeText(context, "Equalizer not found", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
