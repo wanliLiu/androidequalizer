@@ -50,9 +50,6 @@ http://blog.csdn.net/mirkerson/article/details/43242139
     这一频段控制着音色的明亮度，宏亮度和清晰度。一般来说提升这几段使声音宏亮，但不清晰，不可能会引起齿音过重，衰减时声音变得清晰，但声音不宏亮。
 
 
-低音增强、三维音效、混响预设音效
-BassBoot sound
-
 //范围
     20Hz  60Hz  250Hz  2KHz  4KHz  5KHz  6KHz  16KHz
 // 酷狗音乐  百度音乐  +12db -12db
@@ -64,3 +61,4 @@ BassBoot sound
 
 //用系统自带的，读取的支持的中心频率
     60Hz  230Hz  910Hz  3.6KHz  14KHz
+
