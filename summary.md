@@ -40,8 +40,8 @@ android系统自从2.3以后就添加了音效处理的api,比如均衡器（Equ
 ## 所以针对我们目前的情况，我提议
 - 如果要做，目前情况只能用系统默认的参数来做，就跟小米系统的那个差不多，
 <figure class="half">
-    <img src="https://github.com/wanliLiu/androidequalizer/blob/master/%E5%9D%87%E8%A1%A1%E5%99%A8/%E7%BD%91%E6%98%93%E4%BA%91%E5%B0%8F%E7%B1%B3/Screenshot_2017-11-21-11-43-19-045_com.android.mu.png">
-    <img src="https://github.com/wanliLiu/androidequalizer/blob/master/pic/2.png">
+    <img src="https://github.com/wanliLiu/androidequalizer/blob/master/%E5%9D%87%E8%A1%A1%E5%99%A8/%E7%BD%91%E6%98%93%E4%BA%91%E5%B0%8F%E7%B1%B3/Screenshot_2017-11-21-11-43-19-045_com.android.mu.png" width="360" height="640">
+    <img src="https://github.com/wanliLiu/androidequalizer/blob/master/pic/2.png" width="360" height="640">
 </figure>
 - 不做，用系统的，如果系统有就有，没有就没有，跟Android网易云播放器一样
 - 不做均衡器<br/>
